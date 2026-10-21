@@ -50,6 +50,13 @@ jobs:
         if: always()
         run: podman cp karate-run:/app/target ./target
 
+      - name: Preparar index.html para GitHub Pages
+        if: always()
+        run: |
+          cd target/karate-reports
+          HTML_FILE=$(ls *.html | head -n 1)
+          mv "$HTML_FILE" index.html
+
       - name: Configurar entorno de GitHub Pages
         if: always()
         uses: actions/configure-pages@v4
