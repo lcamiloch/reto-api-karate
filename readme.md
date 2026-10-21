@@ -36,10 +36,25 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
    ```
 4. Al finalizar, el reporte detallado se generará automáticamente. Ábrelo en tu navegador desde la siguiente ruta: target/karate-reports/karate-summary.html
 
+### Ejecución en GitHub Actions (CI/CD)
+Este proyecto cuenta con un pipeline configurado para levantar un entorno aislado con Podman, ejecutar las pruebas bajo demanda y publicar los resultados automáticamente. Para ejecutar las pruebas en la nube, sigue estos pasos:
 
-### Ejecución en GitHub Actions
-(Próximamente: En esta sección se documentarán los pasos y el diseño del pipeline CI/CD para ejecutar las regresiones de forma automatizada directamente en los servidores de GitHub).
+1. Ingresa a la página principal de este repositorio en GitHub y haz clic en la pestaña **Actions**.
+2. En el panel lateral izquierdo, selecciona el flujo de trabajo llamado **API Tests - Podman & GitHub Pages**.
+3. En la parte derecha de la pantalla, haz clic en el botón **Run workflow**.
+4. Se desplegará un menú interactivo. En el campo **Flujo de prueba a ejecutar**, selecciona la etiqueta de la prueba que deseas correr (por ejemplo: `@crud`, `@create`, `@get`, `@update` o `@delete`).
+5. Haz clic en el botón verde **Run workflow** para iniciar el contenedor.
+6. Una vez que finalice la ejecución (marcada con un check verde), haz clic sobre su nombre en la lista de flujos recientes para entrar a los detalles.
+7. En la nueva pantalla, asegúrate de estar ubicado en la sección **Summary** del menú lateral izquierdo.
+8. En el panel central, debajo del nombre del pipeline, ubica la caja del trabajo llamado **test-and-deploy**.
+9. Haz clic en el enlace azul generado en esa caja (ej. `https://...github.io/...`) para visualizar directamente el reporte HTML interactivo.
 
 
-### Autor
-**Camilo Chaparro**
+## 👨‍💻 Autor
+
+**Camilo Chaparro** | *SDET & Agile Tester*
+
+Diseñando y orquestando ecosistemas de automatización de pruebas escalables.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/camilo-chaparro-738228141)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/lcamiloch)
