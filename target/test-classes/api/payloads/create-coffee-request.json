@@ -1,0 +1,4 @@
+{
+  "Name": "#(coffeeData.Name)",
+  "Description": "#(coffeeData.Description)"
+}

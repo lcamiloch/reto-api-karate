@@ -1,0 +1,24 @@
+# Archivos compilados y empaquetados de Maven
+target/
+*.class
+*.jar
+*.war
+
+# Reportes generados por Karate y Surefire
+karate-reports/
+surefire-reports/
+
+# Archivos de logs
+*.log
+
+# Configuraciones de Entornos de Desarrollo (IDEs)
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
