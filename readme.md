@@ -43,5 +43,3 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
 ### Autor
 **Camilo Chaparro**
- 
- #mvn -q clean test -Dkarate.options="--tags @get"

@@ -1,0 +1,66 @@
+name: API Tests - Karate
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      test_tag:
+        description: 'Flujo de prueba a ejecutar'
+        required: true
+        default: '@create'
+        type: choice
+        options:
+          - '@create'
+          - '@get'
+          - '@update'
+          - '@delete'
+          - '@crud'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Construir la imagen con Podman
+        run: podman build -t karate-framework -f Containerfile .
+
+      - name: Ejecutar pruebas y generar reporte
+        run: |
+          TAG="${{ github.event.inputs.test_tag || '@create' }}"
+          echo "Ejecutando pruebas con el tag: $TAG"
+          podman run --name karate-run karate-framework mvn -q clean test -Dkarate.env=qa -Dkarate.options="--tags $TAG"
+
+      - name: Extraer el reporte del contenedor
+        if: always()
+        run: podman cp karate-run:/app/target ./target
+
+      - name: Configurar entorno de GitHub Pages
+        if: always()
+        uses: actions/configure-pages@v4
+
+      - name: Empaquetar el reporte HTML de Karate
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'target/karate-reports'
+
+      - name: Desplegar sitio en GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v4
