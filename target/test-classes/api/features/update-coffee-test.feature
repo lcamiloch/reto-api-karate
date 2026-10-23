@@ -9,5 +9,4 @@ Background:
   * def coffeeData2 = read('classpath:api/data/coffee-test-data2.json')
 
 Scenario: Actualizar el precio de un coffee
-  * print 'El ID capturado desde la creación es:', testId
   * call read('classpath:api/tasks/update-coffee-task.feature') { id: '#(testId)' }
